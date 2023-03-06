@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,19 +30,14 @@ public class Student {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToOne
-    @JoinColumn(name = "email_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "email_id", referencedColumnName = "email_id")
     private Email email;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "course_student",
-            joinColumns = {
-                    @JoinColumn(name = "student_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "course_id", referencedColumnName = "id")
-            })
-    private Set<Course> courses;
+            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "student_id"))
+    private List<Course> courses;
 
     public Student(String firstName, String lastName, Email email) {
         this.firstName = firstName;

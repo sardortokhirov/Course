@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -36,8 +38,8 @@ public class Course {
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    @ManyToMany(mappedBy = "courses",fetch = FetchType.LAZY)
-    private Set<Student> students;
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students;
 
 
     public Course(String name, String description, Integer price, Teacher teacher) {

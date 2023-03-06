@@ -28,8 +28,8 @@ public class Teacher {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToOne
-    @JoinColumn(name = "email_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "email_id", referencedColumnName = "email_id")
     private Email email;
 
     public Teacher(String firstName, String lastName, Email email) {
