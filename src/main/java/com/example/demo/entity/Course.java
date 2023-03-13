@@ -35,12 +35,19 @@ public class Course {
     private Integer price;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id")
+    @JoinColumn(name = "author_id",referencedColumnName = "teacher_id")
     private Teacher teacher;
 
     @ManyToMany(mappedBy = "courses")
     private List<Student> students;
 
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 
     public Course(String name, String description, Integer price, Teacher teacher) {
         this.name = name;

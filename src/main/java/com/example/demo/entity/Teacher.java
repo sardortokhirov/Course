@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 /**
  * Date-3/4/2023
  * Time-8:57 AM
@@ -28,6 +30,9 @@ public class Teacher {
     @Column(name = "last_name")
     private String lastName;
 
+    @OneToMany(mappedBy = "teacher")
+    private List<Course> courses;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "email_id", referencedColumnName = "email_id")
     private Email email;
@@ -36,6 +41,14 @@ public class Teacher {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     public Teacher() {

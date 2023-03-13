@@ -10,22 +10,23 @@ import jakarta.persistence.*;
 @Table(name = "email")
 public class Email {
     @Id
-    @SequenceGenerator(
-            name = "email_sequence",
-            sequenceName = "email_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "email_sequence"
-    )
+    @SequenceGenerator(name = "email_sequence", sequenceName = "email_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "email_sequence")
     @Column(name = "email_id")
     private Long id;
 
 
     private String email;
 
+
+
     private String password;
+
+    @OneToOne(mappedBy = "emails")
+    private Student student;
+
+    @OneToOne(mappedBy = "email")
+    private Teacher teacher;
 
     public Long getId() {
         return id;

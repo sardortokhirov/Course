@@ -32,7 +32,23 @@ public class Student {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "email_id", referencedColumnName = "email_id")
-    private Email email;
+    private Email emails;
+
+    public Email getEmails() {
+        return emails;
+    }
+
+    public void setEmails(Email emails) {
+        this.emails = emails;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "course_student",
@@ -42,7 +58,7 @@ public class Student {
     public Student(String firstName, String lastName, Email email) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+        this.emails = email;
     }
 
     @Override
@@ -51,7 +67,6 @@ public class Student {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email=" + email.getEmail() +
                 '}';
     }
 
